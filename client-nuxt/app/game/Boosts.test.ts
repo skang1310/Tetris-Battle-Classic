@@ -1,0 +1,13 @@
+import {describe,it,expect} from 'vitest'
+import {ModeSession} from './GameModes'
+import {normalizeMatchRules} from './MatchRules'
+import {classicKey} from './ClassicKeys'
+import {nativeKey} from './DualKeyboard'
+describe('Facebook-style passive boosts and keyboard aliases',()=>{
+ it('normalizes passive loadouts and fixes the battle duration/KO cap',()=>{const r=normalizeMatchRules({itemStyle:'boosts',durationMs:60000,koTarget:1,boostLoadouts:[['shield','shield','bad'],['twinBomb']]});expect(r.boostLoadouts).toEqual([['shield'],['twinBomb']]);expect(r.durationMs).toBe(120000);expect(r.koTarget).toBe(5);const s=new ModeSession('item',false,0,r);expect(s.original).toBe(true);expect(s.items[0]!.inventory).toEqual([]);expect(s.useItem(0)).toBe(false)})
+ it('creates two bombs per row for Twin Bomb without accidentally collecting old items',()=>{const s=new ModeSession('item',false,0,{itemStyle:'boosts'}),g=s.players[0]!;g.addGarbage(3);expect(g.board.grid.slice(17).every(row=>row.filter(c=>c===9).length===2)).toBe(true);s.update(12001);expect(g.board.grid.flat().some(c=>c>=11)).toBe(false);expect(s.items[0]!.inventory).toEqual([])})
+ it('bounds random shield prevention to fifteen incoming lines',()=>{const s=new ModeSession('item',false,0,{itemStyle:'boosts',boostLoadouts:[[],['shield']]});s.players[0]!.onAttack(100);expect(s.boosts[1]!.blocked).toBeGreaterThan(0);expect(s.boosts[1]!.blocked).toBeLessThanOrEqual(15);expect(s.players[1]!.pending+s.boosts[1]!.blocked).toBe(100);expect(s.boosts[1]!.shieldLeft+s.boosts[1]!.blocked).toBe(15)})
+ it('adds at most fifteen Final Rush lines and only during the final thirty seconds',()=>{const s=new ModeSession('item',false,0,{itemStyle:'boosts',boostLoadouts:[['finalRush'],[]]});s.remaining=30001;s.players[0]!.onAttack(2);expect(s.players[1]!.pending).toBe(2);expect(s.boosts[0]!.rushLeft).toBe(15);s.remaining=30000;for(let i=0;i<20;i++)s.players[0]!.onAttack(1);expect(s.players[1]!.pending).toBe(37);expect(s.boosts[0]!.rushLeft).toBe(0)})
+ it('preserves boosts across KO respawn without adding a manual-item protection window',()=>{const s=new ModeSession('item',false,0,{itemStyle:'boosts'});s.boosts[0]!.shieldLeft=7;s.players[0]!.isGameOver=true;s.update(1);expect(s.boosts[0]!.shieldLeft).toBe(7);expect(s.players[0]!.twinBomb).toBe(true);expect(s.items[0]!.guard).toBe(0);expect(s.kos[1]).toBe(1)})
+ it('uses physical number keys even under shifted/non-Latin input sources',()=>{expect(classicKey({code:'Digit1',key:'!'})).toBe('1');expect(classicKey({code:'Digit7',key:'&'})).toBe('7');expect(nativeKey({type:'key',player:1,key:'2',down:true})).toEqual({player:1,key:'2',down:true})})
+})

@@ -1,0 +1,15 @@
+<template><section class="match-replay" aria-label="명장면 다시 보기"><h3>✦ 오늘의 명장면</h3><div class="replay-picks"><button v-for="(clip,i) in clips" :key="i" :aria-pressed="selected===i" @click="choose(i)">{{ clip.label }}</button></div><div v-if="frame" class="replay-boards"><div v-for="(cells,i) in frame.boards" :key="i"><strong>{{ names[i] }} · {{ frame.kos[i] }} KO</strong><div class="replay-grid"><i v-for="(cell,j) in cells" :key="j" :style="{background:cell?colors[Math.min(cell,8)]:'#192838',borderColor:cell?'#ffffff60':'#ffffff06'}"/></div></div></div><div class="replay-controls"><button @click="toggle">{{ playing?'일시정지':'재생' }}</button><input aria-label="명장면 재생 위치" type="range" min="0" :max="Math.max(0,(clips[selected]?.frames.length??1)-1)" v-model.number="index" @input="playing=false"><span>{{ ((frame?.time??0)/1000).toFixed(1) }}초</span></div><small>보드 기록 재생 · 경기 조작에는 영향을 주지 않아요</small></section></template>
+<script setup lang="ts">
+import {ref,computed,onMounted,onUnmounted} from 'vue'
+import type {HighlightClip} from '~/game/MatchHighlights'
+const props=defineProps<{clips:HighlightClip[];names:string[]}>()
+const selected=ref(0),index=ref(0),playing=ref(false),frame=computed(()=>props.clips[selected.value]?.frames[index.value])
+const colors=['#81919e','#2eccef','#f5d13d','#b26de9','#79d63b','#f65c83','#4587ef','#ffad36','#98a6ac']
+function choose(i:number){selected.value=i;index.value=0;carry=0;playing.value=true}
+function toggle(){if(index.value>=(props.clips[selected.value]?.frames.length??1)-1)index.value=0;carry=0;playing.value=!playing.value}
+let carry=0
+let timer:ReturnType<typeof setInterval>|undefined
+onMounted(()=>{timer=setInterval(()=>{if(!playing.value)return;const frames=props.clips[selected.value]?.frames??[];if(index.value>=frames.length-1){playing.value=false;return}carry+=30;while(index.value<frames.length-1){const duration=Math.max(16,frames[index.value+1]!.time-frames[index.value]!.time);if(carry<duration)break;carry-=duration;index.value++}},30)})
+onUnmounted(()=>clearInterval(timer))
+</script>
+<style scoped>.match-replay{border:1px solid #ffffff38;border-radius:15px;padding:12px;margin:14px 0}.match-replay h3{font-size:14px;margin:0 0 8px}.replay-picks{display:flex;flex-wrap:wrap;gap:5px}.replay-picks button{font-size:10px!important;padding:5px 9px!important;min-height:30px!important}.replay-boards{display:flex;justify-content:center;gap:22px;margin:12px 0}.replay-boards strong{display:block;font-size:10px;margin-bottom:6px}.replay-grid{display:grid;grid-template-columns:repeat(10,1fr);width:110px;height:220px;background:#142334;gap:1px;border:3px solid #8eafd0;border-radius:5px;padding:3px}.replay-grid i{border:1px solid;border-radius:1px}.replay-controls{display:flex;align-items:center;gap:8px}.replay-controls button{font-size:11px!important;min-height:32px!important;padding:4px 10px!important}.replay-controls input{min-width:0;flex:1}.replay-controls span{font-size:10px}.match-replay small{font-size:9px;color:#bed2df}</style>

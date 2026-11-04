@@ -51,3 +51,27 @@ tetris-server-android
 android-server/app/libs/*.aar
 android-server/app/libs/*.jar
 android-server/app/libs
+
+# Classic desktop adaptation
+/dist/
+/output/
+!client-nuxt/public/
+!client-nuxt/public/classic/
+!client-nuxt/public/classic/**
+
+# Temporary internet connector, runtime logs and downloaded binaries
+macos/internet/
+
+# Local design references, test artifacts, and machine-specific validation logs
+/.lazyweb/
+/progress.md
+/client-nuxt/output/
+/macos/*.log
+/macos/validation.txt
+/macos/icons/previous/
+.env.*
+!.env.example
+*.p12
+*.pfx
+*.pem
+*.key

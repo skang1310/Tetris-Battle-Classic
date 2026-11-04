@@ -1,0 +1,137 @@
+/* One palette for the game chrome; the original vivid board remains the play surface. */
+main.classic-shell.refresh-shell,main.classic-shell.refresh-shell:has(.arcade-pages){background-color:#f7f9f0;background-image:radial-gradient(ellipse at 84% 4%,#e8defa55,transparent 35%),radial-gradient(ellipse at 8% 34%,#e9f3d855,transparent 45%);color:#34482c;box-sizing:border-box}
+main.classic-shell.refresh-shell.battle-screen{background-color:#eef5df;background-image:radial-gradient(ellipse at 88% 1%,#e0d3fa65,transparent 45%),radial-gradient(ellipse at 2% 90%,#d5edaa70,transparent 50%),linear-gradient(#f6f9ed,#eaf2dc);padding:12px}
+main.refresh-shell.battle-screen .classic-stage{border-radius:15px;box-shadow:0 12px 35px #344f2910;border:1px solid #fff7;flex-shrink:0}
+main.refresh-shell.battle-screen .classic-stage.feedback-pulse{box-shadow:0 0 0 2px #c7e795,0 8px 30px #7f9b4230}
+main.refresh-shell.battle-screen .classic-options{font-size:10px;font-weight:550;color:#687a51;gap:12px;align-items:center;min-height:32px;margin-top:9px}
+main.refresh-shell.battle-screen .classic-options>span{font-weight:700;color:#6d8255;font-size:10px}
+main.refresh-shell.battle-screen .classic-options button,main.refresh-shell.battle-screen .controller-show{background:#ffffffc7;color:#6b7c58;border:1px solid #dce6cc;border-radius:22px;min-height:34px;padding:7px 15px;font-size:10px;box-shadow:0 2px 4px #374c2003}
+main.refresh-shell.battle-screen .classic-options input{accent-color:#85a650}
+main.refresh-shell.battle-screen .controller-show{margin:6px 0}
+main.refresh-shell.battle-screen .mode-hud{border:1px solid #ded2ec;background:#f4ecfd;color:#8b64b7;box-shadow:none;border-radius:16px;font-size:11px;gap:13px}
+main.refresh-shell.battle-screen .mode-hud span{color:#b29ac7;font-size:10px}
+/* Controls are weighted by frequency: rotate and hard drop stand out. */
+main.refresh-shell.battle-screen .game-controller.game-controller{border:1px solid #fff;background:linear-gradient(130deg,#ffffffed,#fafdf2d9);box-shadow:inset 0 1px #fff,0 10px 30px #496b1d12;color:#657d48;backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-radius:27px;padding-top:12px}
+main.refresh-shell .game-controller.game-controller button{border:1px solid #dce4d1;background:linear-gradient(#fdfef9,#edf2e4);color:#62734e;box-shadow:0 3px 0 #bcc9a625,inset 0 1px #fff;border-radius:17px}
+main.refresh-shell .game-controller.game-controller header{margin-bottom:12px}
+main.refresh-shell .game-controller.game-controller header>span{color:#b0bba1;font-size:7px;letter-spacing:2.2px}
+main.refresh-shell .game-controller.game-controller .hold{font-size:16px;border-radius:13px;padding:7px 12px}
+main.refresh-shell .game-controller.game-controller .pause{border-radius:13px;color:#a39baf;font-size:16px}
+main.refresh-shell .game-controller.game-controller .rotation .pair button{background:linear-gradient(#ece1fc,#dcccf4);border-color:#d1bdea;color:#704795;box-shadow:0 3px 0 #bea3dc30,inset 0 1px #fff8}
+main.refresh-shell .game-controller.game-controller .drop{background:linear-gradient(#d8f29b,#bfe36e);color:#4b6821;border-color:#b9d781;box-shadow:0 3px 0 #a4c16930,inset 0 1px #fff9}
+main.refresh-shell .game-controller.game-controller .soft{color:#6b7f53;background:linear-gradient(#f6f9f0,#eaf0de)}
+main.refresh-shell .game-controller.game-controller button:active:not(:disabled),main.refresh-shell .game-controller.game-controller button.is-held{background:#d3e9a6;border-color:#acc67b;transform:translateY(2px);box-shadow:inset 0 2px 3px #6e8a2420}
+main.refresh-shell .game-controller.game-controller .rotation button.is-held{background:#cdb0f0;border-color:#ad87d5;color:#73509d}
+main.refresh-shell .game-controller.game-controller footer>span{color:#b4c19f;font-size:8px}
+main.refresh-shell .game-controller.game-controller footer button{background:transparent;border:0;box-shadow:none;color:#6a7c53;border-radius:9px}
+/* Quiet item frame; the items themselves carry the vivid color. */
+main.refresh-shell .item-hud .item-tray.party-tray{border:1px solid #fff;background:#ffffffeb;box-shadow:0 5px 18px #516c2810;border-radius:17px;color:#667b4d;padding:8px 10px 5px}
+main.refresh-shell .item-hud .party-tray header{color:#62734c;font-size:9px}
+main.refresh-shell .item-hud .party-tray header span{color:#9e7cbd}
+main.refresh-shell .item-hud .party-tray header small{color:#815f9b;font-size:8px}
+main.refresh-shell .item-hud .party-tray .item-slots button{border:1px solid #eddbcd;background:#fff0e5;color:#88552f;border-radius:11px;gap:6px}
+main.refresh-shell .item-hud .party-tray .item-slots .shield{background:#e7f2fc;border-color:#d6e6f4;color:#3f719d}
+main.refresh-shell .item-hud .party-tray .item-slots .broom{background:#eaf7df;border-color:#dceccc;color:#5b7733}
+main.refresh-shell .item-hud .party-tray .item-slots .slow{background:#f0e6fc;border-color:#e3d4f2;color:#7c559f}
+main.refresh-shell .item-hud .party-tray .item-slots .gift{background:#fcf4dc;border-color:#efe5c7;color:#856d33}
+main.refresh-shell .item-hud .party-tray .item-slots .empty-slot{background:#f6f8f1;border:1px dashed #dfe6d2;color:#b5c0a3}
+main.refresh-shell .item-hud .party-tray .item-slots button:disabled{opacity:.5}
+main.refresh-shell .item-hud .party-tray .item-slots button:active:not(:disabled){transform:translateY(1px);filter:brightness(.95)}
+main.refresh-shell .item-hud .party-tray .item-slots kbd{background:#fff9;color:inherit;font-size:7px;border:1px solid #ffffff9c}
+main.refresh-shell .item-hud .party-tray .item-slots b{font-size:9px}
+main.refresh-shell .item-hud .party-tray p{color:#84649c;font-size:8px}
+main.refresh-shell .item-hud.item-fever .item-tray.party-tray{background:linear-gradient(130deg,#fff9e6,#ffeff7);border-color:#e9d5a2}
+main.refresh-shell .item-hud .fever-label{font-size:10px;color:#c88d9d}
+/* Readable pause sheets and settings, with fewer controls at a time. */
+main.refresh-shell .pause-layer{background:#3147233d;backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+main.classic-shell.refresh-shell.battle-screen .pause-card{background:#fbfdf4;border:1px solid white;border-radius:26px;box-shadow:0 18px 50px #24361c26;color:#61714d;padding:25px}
+main.classic-shell.refresh-shell.battle-screen .pause-card .pause-eyebrow{display:block;color:#b3bea2;font:700 7px ui-monospace,monospace;letter-spacing:1.6px}
+main.classic-shell.refresh-shell.battle-screen .pause-card h1{color:#86a64f;text-shadow:none;font-size:32px;letter-spacing:-1.4px;margin:15px 0}
+main.classic-shell.refresh-shell.battle-screen .pause-card p{color:#74875e;font-size:11px;line-height:1.9}
+main.classic-shell.refresh-shell.battle-screen .pause-card button{background:linear-gradient(#e4f3c3,#d2eaaa);border:1px solid #bdd68c;color:#6c8740;border-radius:15px;font-size:12px;box-shadow:none;min-height:39px;line-height:1.6;padding:9px 18px;font-weight:700}
+main.classic-shell.refresh-shell.battle-screen .pause-card button[aria-label=RESUME]{background:linear-gradient(#c6eb77,#b3df5e);color:#4b6825}
+main.classic-shell.refresh-shell.battle-screen .pause-card .local-rematch button:nth-child(2){background:#e8dafa;border-color:#d5beee;color:#9a73c0}
+main.classic-shell.refresh-shell.battle-screen .pause-card button[aria-pressed=true]{background:#bfdc86;border-color:#9fbb64}
+main.classic-shell.refresh-shell.battle-screen .pause-card .rematch-status{color:#9db47b!important}
+main.classic-shell.refresh-shell.battle-screen .pause-card .personal-best{color:#c4a467}
+.controller-settings-backdrop:has(.v2-settings){background:#27371c55;backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px)}
+.controller-settings.v2-settings{border:1px solid white;border-radius:27px;background:linear-gradient(145deg,#fbfdf4,#f7f8f2);box-shadow:0 30px 80px #273a1a26;color:#657950;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;padding:25px;max-height:88dvh;width:420px}
+.controller-settings.v2-settings header{gap:15px}
+.controller-settings.v2-settings header h2{font-size:25px;letter-spacing:-1px;color:#3e5730}
+.controller-settings.v2-settings header button{background:white;border:1px solid #e1e7d4;color:#a7b397;width:34px;height:34px;font-size:13px}
+.controller-settings.v2-settings>p{font-size:11px;color:#79886a;margin:11px 0 19px;line-height:1.8}
+.controller-settings.v2-settings .settings-tabs{display:flex;gap:5px;padding:4px;background:#e9efdf;border-radius:16px;margin-bottom:21px}
+.controller-settings.v2-settings .settings-tabs button{flex:1;min-width:0;min-height:37px;border-radius:12px;border:0;background:transparent;color:#788b61;font:700 11px -apple-system,Arial;cursor:pointer}
+.controller-settings.v2-settings .settings-tabs button[aria-selected=true]{background:white;color:#5c7641;box-shadow:0 2px 7px #5570200c}
+.controller-settings.v2-settings h3{color:#62764a;font-size:12px;letter-spacing:-.3px;margin:20px 0 12px}
+.controller-settings.v2-settings label{font-size:11px;font-weight:600;color:#62764a;margin:18px 0}
+.controller-settings.v2-settings label>span{font-size:9px;color:#899777;margin-top:6px}
+.controller-settings.v2-settings input[type=range]{accent-color:#b29bca;height:17px;margin-top:10px}
+.controller-settings.v2-settings input[type=checkbox]{accent-color:#a5bd7b}
+.controller-settings.v2-settings select{background:white;border:1px solid #dfe7d2;border-radius:12px;color:#8d9f76;padding:11px;font-size:12px}
+.controller-settings.v2-settings small{font-size:10px;line-height:1.9;color:#788a64;margin-top:13px}
+.controller-settings.v2-settings .settings-save-note{font-size:9px;color:#899a73;text-align:center;margin-top:22px}
+.controller-settings.v2-settings .settings-done{background:linear-gradient(#c9ec85,#bde375);color:#4d682d;border:1px solid #b5d585;border-radius:15px;font-size:12px;font-weight:750;padding:12px;min-height:44px;margin-top:12px}
+.controller-settings.v2-settings .speed-presets{gap:7px}
+.controller-settings.v2-settings .speed-presets button{border:1px solid #e0e6d6;background:#fff;color:#788e62;border-radius:13px;font:600 11px -apple-system,Arial;min-height:37px;cursor:pointer}
+.controller-settings.v2-settings .speed-presets button[aria-pressed=true]{background:#eae0f6;border-color:#d8c8e9;color:#805c9d}
+.controller-settings.v2-settings .feedback-test{background:#eee4f8;border:1px solid #dfcfed;color:#7c5a9e;border-radius:12px;min-height:40px;padding:8px 18px;font-size:11px}
+.controller-settings.v2-settings .dual-keyboards{border:1px solid #e1e8d4;background:#f3f7eb;border-radius:17px;padding:15px}
+.controller-settings.v2-settings .dual-keyboards h3{margin-top:0}
+.controller-settings.v2-settings .dual-keyboards p{font-size:10px;line-height:1.8;color:#788c62}
+.controller-settings.v2-settings .dual-keyboards button{border:1px solid #d9e3c9;background:white;color:#6a7e50;border-radius:11px;min-height:37px;font-size:10px;padding:8px 11px}
+.controller-settings.v2-settings .dual-keyboards small{font-size:9px;color:#788f61}
+.controller-settings.v2-settings .keyboard-seat{border-bottom:1px solid #e5ebdd;padding:4px 0;gap:6px}
+.controller-settings.v2-settings .keyboard-seat span{color:#687d52;font-size:10px}
+.controller-settings.v2-settings button:focus-visible{outline:3px solid #b291d5;outline-offset:3px}
+@media(max-width:700px){main.refresh-shell.battle-screen .classic-options{gap:7px;font-size:8px;margin-top:7px}main.refresh-shell.battle-screen .classic-options>span{font-size:8px}main.refresh-shell.battle-screen .classic-options button{font-size:9px;padding:5px 11px;min-height:31px}main.refresh-shell.battle-screen .controller-show{font-size:9px}main.refresh-shell.battle-screen .classic-stage{border-radius:12px}.controller-settings.v2-settings{padding:22px;width:390px;max-height:88dvh}.controller-settings.v2-settings header h2{font-size:23px}.controller-settings.v2-settings .settings-tabs{margin-bottom:18px}main.refresh-shell .game-controller.game-controller footer>span{font-size:7px}}
+@media(prefers-reduced-motion:reduce){main.refresh-shell .game-controller.game-controller button:active:not(:disabled),main.refresh-shell .game-controller.game-controller button.is-held{transform:none}}
+@media(prefers-reduced-transparency:reduce){main.refresh-shell .game-controller.game-controller,.controller-settings.v2-settings{background:#f8fbf1;backdrop-filter:none;-webkit-backdrop-filter:none}.controller-settings-backdrop:has(.v2-settings){background:#3a482ac9;backdrop-filter:none;-webkit-backdrop-filter:none}}
+
+main.refresh-shell,.v2-settings,.map-dialog{color-scheme:light}
+.controller-settings.v2-settings input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;height:24px;cursor:pointer}
+.controller-settings.v2-settings input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:6px;background:#e0e8d4;border:1px solid #d8e2ca}
+.controller-settings.v2-settings input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;margin-top:-7px;background:#b49bd1;border:3px solid white;box-shadow:0 2px 5px #57416420}
+.controller-settings.v2-settings input[type=range]::-moz-range-track{height:6px;border-radius:6px;background:#e0e8d4;border:1px solid #d8e2ca}
+.controller-settings.v2-settings input[type=range]::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:#b49bd1;border:3px solid white;box-shadow:0 2px 5px #57416420}
+.controller-settings.v2-settings .settings-tabs button{min-height:41px;font-size:12px}
+.controller-settings.v2-settings label{font-size:12px}
+.controller-settings.v2-settings .setting-check{min-height:40px;line-height:1.7}
+/* A shared piece stream and an explicit result remove ambiguity in local two-player games. */
+main.refresh-shell .match-status{display:flex;align-items:center;justify-content:space-between;gap:18px;box-sizing:border-box;width:800px;max-width:calc(100vw - 24px);min-height:40px;padding:7px 15px;margin-top:6px;border:1px solid #dce7cd;border-radius:14px;background:#ffffffbb;color:#748c57}
+main.refresh-shell .match-status>div{display:flex;align-items:center;gap:8px;font:650 10px -apple-system,Arial;white-space:nowrap}
+main.refresh-shell .match-status>div>span{font:800 9px ui-monospace,monospace;color:#718e4c;background:#e8f1da;border-radius:7px;padding:5px 6px}
+main.refresh-shell .match-status>div:last-child>span{background:#efe6fa;color:#9676b3}
+main.refresh-shell .match-status small{font-size:8px;color:#8d9f78}
+main.refresh-shell .match-status section{text-align:center;min-width:0}
+main.refresh-shell .match-status section strong{display:block;font-size:10px;color:#7b628d}
+main.refresh-shell .match-status section small{display:block;font-size:7px;margin-top:3px}
+main.classic-shell.refresh-shell.battle-screen .pause-card:has(.result-comparison){width:355px;max-width:calc(100% - 28px);padding:22px}
+main.classic-shell.refresh-shell.battle-screen .pause-card h1{overflow-wrap:anywhere;font-size:27px}
+main.refresh-shell .result-comparison table{width:100%;border-collapse:collapse;margin:14px 0;font-size:10px;color:#7b8e65;text-align:right}
+main.refresh-shell .result-comparison th{text-align:left;font-size:9px;line-height:1.7}
+main.refresh-shell .result-comparison thead th{font-weight:550;color:#9ba98c;text-align:right;font-size:8px;padding:5px 3px}
+main.refresh-shell .result-comparison thead th:first-child{text-align:left}
+main.refresh-shell .result-comparison tbody td,main.refresh-shell .result-comparison tbody th{padding:10px 4px;border-top:1px solid #e4ebd9}
+main.refresh-shell .result-comparison tbody th{max-width:135px;overflow-wrap:anywhere;color:#7f9566}
+main.refresh-shell .result-comparison .result-winner{background:#edf5df;color:#688740}
+main.refresh-shell .result-comparison .result-winner th{color:#638439}
+main.refresh-shell .result-comparison .result-winner span{font:750 6px ui-monospace,monospace;color:#9270ac;background:#eaddf7;border-radius:4px;padding:3px;margin-left:3px}
+main.refresh-shell .result-comparison>small{font-size:8px;line-height:1.8;color:#a4b391;display:block;margin:5px 0 15px}
+main.refresh-shell .result-comparison .result-reason{font-size:11px;line-height:1.8;color:#8ba46b;margin:4px 0}
+main.refresh-shell.phone-landscape .match-status{order:3;width:100%;min-height:34px;margin:0}
+main.refresh-shell.phone-landscape:has(.item-hud) .match-status{padding:5px 12px}
+@media(max-width:700px){main.refresh-shell .match-status{gap:6px;padding:6px 10px;max-width:calc(100vw - 24px)}main.refresh-shell .match-status>div{gap:5px;font-size:9px}main.refresh-shell .match-status>div>small{display:none}main.refresh-shell .match-status section small{font-size:6px}main.refresh-shell .match-status>div>span{font-size:8px;padding:4px 5px}main.refresh-shell .match-status section strong{font-size:9px}}
+main.refresh-shell.phone-landscape .match-status{order:4}
+main.refresh-shell.phone-landscape .classic-options{order:5}
+main.refresh-shell.phone-landscape .mode-hud{order:3;width:205px;max-width:205px;margin:0;flex-direction:column;gap:6px;padding:12px;text-align:center}
+main.classic-shell.refresh-shell.battle-screen .pause-card.winner-two h1{color:#9471b4}
+main.classic-shell.refresh-shell.battle-screen .pause-card.draw-result h1{color:#9b9484}
+main.refresh-shell .result-comparison .result-winner:nth-child(2){background:#f0e8fa;color:#9571b1}
+main.refresh-shell .result-comparison .result-winner:nth-child(2) th{color:#8d64ac}
+
+main.refresh-shell .match-status .ko-tally{display:flex;flex-direction:column;gap:3px;line-height:1.3}main.refresh-shell .match-status .ko-received{color:#9c536d;font-size:9px}@media(max-width:700px){main.refresh-shell .match-status .ko-received{font-size:8px}}
+
+main.refresh-shell .match-status .ko-received{display:block;background:#ffe4ed;color:#a52350;border:1px solid #efb2c6;border-radius:6px;padding:4px 6px;font-size:11px;font-weight:850}@media(max-width:700px){main.refresh-shell .match-status .ko-received{font-size:10px}}
+
+main.refresh-shell .match-status .ko-received{background:#fff0df;border-color:#ddbb9c;color:#9c482d}

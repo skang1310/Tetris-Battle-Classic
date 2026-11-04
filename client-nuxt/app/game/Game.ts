@@ -73,10 +73,7 @@ export class Game {
         const type = this.pieceQueue.pop()!
         const piece = new Tetromino(type)
 
-        // Check if spawn position is valid (game over check)
-        if (!this.canPlacePiece(piece)) {
-            this.isGameOver = true
-        }
+        // Queue generation is not activation: only the current piece can top out.
 
         // Reset counters
         this.dropTimer = 0
@@ -211,6 +208,7 @@ export class Game {
             this.currentPiece.x = 3
             this.currentPiece.y = 0
         }
+        if (!this.canPlacePiece(this.currentPiece)) this.isGameOver = true
     }
 
     /**

@@ -1,386 +1,72 @@
-# Tetris Battle
+# Tetris Battle Classic
 
-<!-- Version Badges -->
-![Frontend](https://img.shields.io/badge/Frontend-v3.16.0-00DC82?logo=nuxt.js&logoColor=white)
-![Android Server](https://img.shields.io/badge/Android_Server-v1.3.0-3DDC84?logo=android&logoColor=white)
+맥에서 두 사람이 함께 즐기는 테트리스 배틀입니다. **Battle Club** 화면에서 기본전·스피드전·아이템전과 플레이 방식을 고른 뒤, 시작 설정과 3·2·1 카운트다운을 거쳐 플레이합니다.
 
-<!-- Tech Stack Badges -->
-![Nuxt](https://img.shields.io/badge/Nuxt-4.x-00DC82?logo=nuxt.js)
-![Vue](https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vue.js)
-![Go](https://img.shields.io/badge/Go-1.21-00ADD8?logo=go&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript)
-![License](https://img.shields.io/badge/license-MIT-green)
-![PWA](https://img.shields.io/badge/PWA-ready-5A0FC8?logo=pwa)
+## 주요 기능
 
-**🚧 Status: Migrating to TypeScript/Web Client 🚧**
+- CPU 대전, 한 키보드 2P, 맥에서 키보드 두 개를 사용하는 2P
+- 같은 Wi-Fi의 맥·아이폰에서 방 코드와 링크로 연결하는 대전
+- 2P는 매 판 직전과 다른 랜덤 맵, 두 플레이어에게 같은 블록 순서
+- 숫자키로 쓰는 수집형 아이템과 선택 가능한 자동 부스트
+- 시간·KO·선승제·협동·실력 보정 설정
+- 개인 프로필, 키 배치·반응 속도 저장, 키보드 자동 배정
+- 결과 비교, 두 사람 준비 후 재대결, 경기 내 명장면 다시 보기
+- 모바일 하단 메뉴와 고정 시작 버튼, 터치 컨트롤러
 
-This project is currently being migrated from a C++/Raylib desktop application to a modern **Nuxt.js Web Application (PWA)** for better accessibility and cross-platform support.
+## 맥 앱 빌드
 
-## 🌟 New Nuxt.js Client (Recommended)
+필요한 도구: Node.js 20 이상, npm, `go.mod`에 지정된 Go, Xcode Command Line Tools. 맥 앱은 Apple Silicon/macOS 12 이상을 대상으로 합니다.
 
-Please proceed to the `client-nuxt` directory for the latest version.
-
-- **Directory:** [`/client-nuxt`](./client-nuxt)
-- **Tech Stack:** Nuxt.js, TypeScript, HTML5 Canvas
-- **Setup:**
-  ```bash
-  cd client-nuxt
-  npm install
-  npm run dev
-  ```
-
-## 📱 Android Server App
-
-A native Android application that hosts the game server for local multiplayer matches.
-
-- **Directory:** [`/android-server`](./android-server)
-- **Tech Stack:** Kotlin, Android SDK, Java-WebSocket
-- **Features:** 
-  - Portable Game Server
-  - Real-time IP Display
-  - Connection Logging
-  - One-tap Start/Stop
-- **Setup:** Open `android-server` in Android Studio and run.
-
-### 🍎 Mac Simulation (Local Dev)
-If you want to test the full stack (Go Server + Nuxt Client) locally without an Android device:
-```bash
-make dev
-```
-This script rebuilds the frontend, copies assets, and starts a local Go server simulating the Android environment on `http://localhost:8080`.
-
-**Run Server Only (Manual):**
-If you only want to run the Go server (without rebuilding the frontend):
-```bash
-go run cmd/mac-sim/main.go
+```sh
+npm --prefix client-nuxt ci
+bash macos/build.sh
+open 'dist/Tetris Battle.app'
 ```
 
-### Features
+결과물은 `dist/Tetris Battle.app`, `dist/Tetris Battle.zip`입니다. 앱이 자체 Go 서버를 시작하고 종료 시 정리합니다. 기본 포트 8080이 비어 있어야 합니다. 사용 가능한 Apple Development 서명 또는 로컬 임시 서명을 사용하며, 일반 배포용 Developer ID 공증은 포함하지 않습니다. 자세한 내용은 [맥 실행 안내](macos/README.md)를 참고하세요.
 
-| Mode | Description |
-|------|-------------|
-| 🎯 **Solo** | Classic Tetris gameplay |
-| ✨ **Special** | Cascade gravity with chain reactions + visual effects |
-| 🎮 **Duo** | Local 2-player mode |
-| 📡 **LAN** | Local Network Multiplayer (Android Server / Mac Sim) |
-| 🌐 **Online** | *Waiting for Server Deployment* 🚧 |
+## 브라우저 개발
 
-### Special Mode Features
-- **Cascade Gravity** - Blocks fall individually (Puyo-style)
-- **Chain Reactions** - Combos give bonus points
-- **5 Visual Effects** - Explosion, Sparkle, Wave, Shatter, Classic
-- **Hold Piece** - Press `C` to swap (Special mode only)
-
-### Controls
-| Key | Action |
-|-----|--------|
-| ← → | Move |
-| ↑ | Rotate |
-| ↓ | Soft Drop |
-| Space | Hard Drop |
-| C | Hold (Special) |
-| P | Pause |
-| 👻 Button | Toggle Ghost |
-| 🏠 Exit | Back to Menu |
-
-### Mobile Controls
-- **Swipe Left/Right** - Move
-- **Swipe Down** - Hard Drop
-- **Swipe Up** - Hold
-- **Tap** - Rotate
-- **Long Press** - Soft Drop
-
----
-
-## 📡 LAN Mode Guide (Multiplayer)
-
-LAN Mode ช่วยให้คุณเล่นกับเพื่อนผ่านเครือข่าย Local โดยใช้ **Android Server App** หรือ **Mac/PC Simulation** เป็น Server กลาง
-
-### 🏗️ Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                    GAME SERVER                          │
-│  (Android App / Mac Simulation / Go Server)             │
-│                  IP: 192.168.x.x:8080                   │
-└─────────────────────────────────────────────────────────┘
-                    ▲               ▲
-          WebSocket │               │ WebSocket
-                    │               │
-             ┌──────┴───┐     ┌─────┴─────┐
-             │ Player 1 │     │ Player 2  │
-             │  (HOST)  │     │  (GUEST)  │
-             └──────────┘     └───────────┘
+```sh
+npm --prefix client-nuxt ci
+npm --prefix client-nuxt run dev
 ```
 
-### 🔧 Prerequisites
+전체 로컬 대전 서버를 실행하려면 먼저 정적 파일을 생성합니다.
 
-1. **Server** - หนึ่งในตัวเลือกต่อไปนี้:
-   - 📱 **Android Server App** - ติดตั้งจาก `/android-server`
-   - 💻 **Mac Simulation** - รัน `make dev` หรือ `go run cmd/mac-sim/main.go`
-
-2. **Clients** - เปิด Web Browser (Chrome/Safari/Edge) แล้วไปที่ `http://<SERVER_IP>:8080`
-
----
-
-### 🔗 Connection Scenarios
-
-#### 📌 Scenario 1: PC ↔ PC (Same WiFi)
-
-เหมาะสำหรับการทดสอบบน LAN เดียวกัน
-
-```
-[PC - Server]                    [PC - Client]
-     │                                 │
-     └───── Same WiFi Network ─────────┘
-           (192.168.1.x)
+```sh
+TETRIS_DESKTOP=1 npm --prefix client-nuxt run generate
+mkdir -p public
+cp -R client-nuxt/.output/public/. public/
+go run ./cmd/macos
 ```
 
-**ขั้นตอน:**
-1. **PC1 (Server):** รัน `make dev` → Server จะแสดง IP (เช่น `192.168.1.100:8080`)
-2. **PC2 (Client):** เปิด Browser → `http://192.168.1.100:8080`
-3. ทั้งคู่เลือก **LAN Mode** → ใส่ชื่อ → **Join Game**
+실제 접속 주소·실행 옵션은 [맥 실행 안내](macos/README.md)에 있습니다. 외부 인터넷 대전에는 별도의 서버 또는 연결 경로가 필요합니다. 이 저장소에 올리는 것만으로 인터넷 서버가 배포되지는 않습니다. Firebase는 기존 레거시 기능의 선택 사항이며 로컬 게임에는 필요하지 않습니다.
 
----
+## 조작
 
-#### 📌 Scenario 2: PC → Mobile (PC เป็น Server)
+| 입력 | 1P / 등록된 각자 키보드 | 한 키보드 2P |
+|---|---|---|
+| 이동 | ← → | A D |
+| 회전 / 내리기 | ↑ / ↓ | W / S |
+| 빠른 낙하 / 홀드 | Space / C | Q / E |
+| 수집형 아이템 | 1·2·3 또는 V·B·N | 7·8·9 또는 R·T·Y |
+| 결과에서 재대결 준비 | Enter | Shift+Enter |
 
-PC รัน Server, Mobile เชื่อมต่อเข้ามา
+키보드 두 개는 macOS 입력 모니터링 허용과 첫 등록이 필요합니다. 같은 기기임을 명확하게 식별할 수 있을 때 자동 복원하며, 모호하면 다시 등록합니다. CPU·온라인·각자 키보드의 키 배치와 입력 속도는 설정 → 프로필에서 바꿀 수 있습니다.
 
-```
-[PC - Server (Host)]
-   192.168.1.100:8080
-          │
-          ▼
-[Mobile - Client via WiFi]
-```
+## 검증
 
-**ขั้นตอน:**
-1. **PC:** รัน `make dev` หรือ `go run cmd/mac-sim/main.go`
-2. **PC:** ตรวจสอบ IP ของ PC (ใช้ `ipconfig` บน Windows หรือ `ifconfig` บน Mac)
-3. **Mobile:** เชื่อมต่อ **WiFi เดียวกัน** กับ PC
-4. **Mobile:** เปิด Browser → `http://<PC_IP>:8080` (เช่น `http://192.168.1.100:8080`)
-5. ทั้งคู่เลือก **LAN Mode** → **Join Game**
-
----
-
-#### 📌 Scenario 3: Mobile → PC (Mobile เป็น Server ผ่าน Android App)
-
-Android เปิด Server, PC เชื่อมต่อเข้ามา
-
-```
-[Android - Server App]
-   192.168.1.50:8080
-          │
-          ▼
-[PC - Client via WiFi]
+```sh
+npm --prefix client-nuxt run typecheck
+npm --prefix client-nuxt test
+go test -race ./...
 ```
 
-**ขั้นตอน:**
-1. **Android:** เปิด **Tetris Battle Server** app → กด **Start**
-2. **Android:** App จะแสดง IP Address (เช่น `192.168.1.50`)
-3. **PC:** เปิด Browser → `http://192.168.1.50:8080`
-4. ทั้งคู่เลือก **LAN Mode** → **Join Game**
+Go의 정적 파일 포함을 위해 먼저 위의 정적 파일 생성·복사 과정을 실행하세요. `macos/verify-*.mjs`는 개발 과정의 브라우저 검증 도구이며 일부는 로컬 Codex Playwright 경로를 사용합니다.
 
----
+## 출처
 
-#### 📌 Scenario 4: Mobile ↔ Mobile (Same WiFi)
+기존 [oatrice/Tetris-Battle](https://github.com/oatrice/Tetris-Battle)의 코드와 히스토리를 바탕으로 확장했습니다. 원본 프로젝트 안내는 [UPSTREAM-README](docs/UPSTREAM-README.md)에 보존했습니다. 원작 스타일 화면·스프라이트·음악과 맵 참고 자료는 [HCN1222/Tetris-battle-with-Q-learning](https://github.com/HCN1222/Tetris-battle-with-Q-learning)이며, 해당 MIT 고지를 [REFERENCE-LICENSE](macos/REFERENCE-LICENSE)에 보존했습니다.
 
-เล่น 2 มือถือบน WiFi เดียวกัน
-
-```
-[Mobile 1 - Server (Android App)]
-        192.168.1.50:8080
-               │
-               ▼
-[Mobile 2 - Client (Browser)]
-```
-
-**ขั้นตอน:**
-1. **Mobile 1 (Android):** เปิด Server App → กด **Start** → ดู IP
-2. **Mobile 2:** เชื่อมต่อ **WiFi เดียวกัน**
-3. **Mobile 2:** เปิด Browser → `http://<Mobile1_IP>:8080`
-4. ทั้งคู่เลือก **LAN Mode** → **Join Game**
-
----
-
-#### 📌 Scenario 5: Mobile Hotspot (ไม่มี WiFi Router)
-
-ใช้ Hotspot ของมือถือเครื่องหนึ่งแทน Router
-
-```
-┌───────────────────────────────────┐
-│  [Mobile 1 - Hotspot + Server]    │
-│  ┌────────────────────────────┐   │
-│  │ Hotspot: "MyHotspot"       │   │
-│  │ Server IP: 192.168.43.1    │   │
-│  └────────────────────────────┘   │
-└───────────────────────────────────┘
-               │
-               ▼
-[Mobile 2 / PC - Connects to Hotspot]
-```
-
-**ขั้นตอน:**
-1. **Mobile 1:** เปิด **Hotspot** (ปกติจะได้ IP `192.168.43.1`)
-2. **Mobile 1:** เปิด **Tetris Battle Server** app → กด **Start**
-3. **Mobile 2 / PC:** เชื่อมต่อ WiFi ไปที่ Hotspot ของ Mobile 1
-4. **Mobile 2 / PC:** เปิด Browser → `http://192.168.43.1:8080`
-5. ทั้งคู่เลือก **LAN Mode** → **Join Game**
-
-> 💡 **Tip:** IP ของ Hotspot มักจะเป็น `192.168.43.1` บน Android หรือ `172.20.10.1` บน iPhone
-
----
-
-### 🎮 Host vs Guest
-
-| Role | คำอธิบาย |
-|------|----------|
-| 👑 **Host** | ผู้เล่นคนแรกที่ Join → ตั้งค่า Game Settings ได้ (Attack, Ghost, Cascade, **Hold Piece**) |
-| 👤 **Guest** | ผู้เล่นคนที่สอง → Settings จะ Sync มาจาก Host |
-
----
-
-### ⚠️ Troubleshooting
-
-| ปัญหา | วิธีแก้ |
-|-------|--------|
-| เชื่อมต่อไม่ได้ | ตรวจสอบว่าอยู่ในเครือข่ายเดียวกัน (Same WiFi/Hotspot) |
-| หน้าจอขาวหรือ Error | ตรวจสอบว่า Server กำลังรันอยู่ ลอง Refresh หน้า |
-| IP ไม่ถูกต้อง | ใช้ปุ่ม **Use Browser URL** ใน Join Game popup |
-| Firewall บล็อก | ปิด Firewall ชั่วคราว หรืออนุญาต Port 8080 |
-
----
-
-# Legacy C++ Version (Raylib)
-
-*The documentation below applies to the original C++ implementation.*
-
-A modern Tetris game built with Raylib, featuring single-player, local two-player, and online two-player modes. Compete against friends locally or online to see who can clear lines faster and survive longer!
-
-## Features
-
-*   **Single-Player Mode:** Enjoy the classic Tetris experience, focusing on high scores and endless play.
-*   **Local Two-Player Mode:** Challenge a friend on the same machine in a head-to-head battle.
-    *   Player 1 uses Arrow Keys, Player 2 uses WASD.
-    *   Separate boards, scores, and next piece previews.
-    *   First player to reach Game Over loses; the other player wins.
-*   **Online Two-Player Mode (Network):** Play against friends over a local network or the internet.
-    *   **Host Game:** Start a server and share your IP address with an opponent.
-    *   **Join Game:** Connect to a host's IP address to challenge them.
-    *   Real-time synchronization of game state (board, score, next piece) and player actions.
-    *   Automatic winner detection and game-over handling.
-*   **Player Name Customization:**
-    *   Enter your name on the title screen, which is saved for future sessions.
-    *   Change your name anytime from the in-game UI.
-*   **Enhanced Controls:**
-    *   **Delayed Auto Shift (DAS):** Smooth and responsive horizontal movement for a competitive edge.
-    *   **Soft Drop Safety:** Prevents accidental soft dropping of a newly spawned piece if the 'down' key is held.
-    *   **On-Screen Keyboard (OSK):** Convenient for name and IP address input, especially on touch devices or Web builds.
-*   **Intuitive UI/UX:**
-    *   Clear mode selection and network setup screens.
-    *   Pause functionality.
-    *   Comprehensive Game Over screen displaying winner and scores for all modes.
-    *   Dynamic UI elements for two-player layouts.
-*   **Cross-Platform:** Powered by Raylib, allowing for easy compilation and execution on various platforms (Windows, Linux, macOS, WebAssembly).
-
-## How to Play
-
-### Getting Started
-
-1.  **Launch the Game:** Upon launching, you'll be prompted to enter your player name. This name will be saved for future sessions.
-2.  **Mode Selection:** After entering your name, choose your desired game mode:
-    *   `1 Player`: Classic single-player Tetris.
-    *   `2 Player (Local)`: Two players on the same computer.
-    *   `2 Player (Online)`: Network multiplayer (Host or Join).
-
-### Controls
-
-#### Player 1 (Keyboard & Touch)
-
-*   **Move Left:** `Left Arrow` / On-screen `<` button
-*   **Move Right:** `Right Arrow` / On-screen `>` button
-*   **Rotate Piece:** `Up Arrow` or `Spacebar` / On-screen `^` button
-*   **Soft Drop (continuous):** `Down Arrow` / On-screen `v` button
-*   **Restart Game / Disconnect (Network):** `R` key / On-screen "Restart" button
-*   **Pause / Unpause Game:** `P` key / On-screen "Pause" button
-*   **Change Name (Return to Title Screen):** `N` key / On-screen "Change Name" button
-
-#### Player 2 (Keyboard - Local Multiplayer Only)
-
-*   **Move Left:** `A` key
-*   **Move Right:** `D` key
-*   **Rotate Piece:** `W` key
-*   **Soft Drop (continuous):** `S` key
-
-### Online Multiplayer Instructions
-
-To play online, one player must **Host** the game, and the other must **Join**.
-
-#### Hosting a Game
-
-1.  From the "Mode Selection" screen, choose "2 Player (Online)".
-2.  Select "Host Game".
-3.  The game will display your local IP address (e.g., `192.168.1.100:12345`). **You need to share this IP address with your friend.**
-    *   _Note:_ The displayed IP might initially be `127.0.0.1` (loopback). For actual network play, your friend will need your local network IP (e.g., `192.168.x.x`) or external IP if playing over the internet.
-4.  Once your friend successfully connects, the "Start Online" button will become active. Click it to begin the game!
-
-#### Joining a Game
-
-1.  From the "Mode Selection" screen, choose "2 Player (Online)".
-2.  Select "Join Game".
-3.  Enter the host's IP address (e.g., `192.168.1.100`) into the input field. The default port (`:12345` for desktop, `:12346` for Web) will be appended automatically.
-    *   Use the on-screen keyboard or your physical keyboard for input.
-4.  Click "Connect" (or press `Enter`).
-5.  Wait for the host to start the game.
-
-#### Important Network Notes
-
-*   **Firewall/Port Forwarding:** If playing over the internet, the host might need to configure their router for port forwarding. The default port is `12345` for desktop applications and `12346` for Web/WebSocket builds.
-*   **IP Address:** For local network play, ensure you're using the host's actual local network IP (e.g., `192.168.x.x`). For internet play, a public IP or a service like Hamachi/ZeroTier might be needed.
-*   **Connection Errors:** If a connection fails or is lost, an error message will be displayed, and you'll be prompted to retry.
-
-## Building and Running
-
-This project uses Raylib and CMake.
-
-### Dependencies
-
-*   **Raylib:** A simple and easy-to-use library to enjoy videogames programming.
-    *   Ensure Raylib is installed on your system or configured for your build environment.
-
-### Build Steps
-
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/oatrice/Tetris-Battle.git
-    cd Tetris-Battle
-    ```
-2.  **Create a Build Directory:**
-    ```bash
-    mkdir build
-    cd build
-    ```
-3.  **Configure CMake:**
-    ```bash
-    cmake ..
-    ```
-    _For Emscripten (WebAssembly) builds, you might use:_
-    ```bash
-    emcmake cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_WEB=ON
-    ```
-4.  **Build the Project:**
-    ```bash
-    cmake --build .
-    ```
-    _For Emscripten builds:_
-    ```bash
-    emmake make
-    ```
-5.  **Run the Game:**
-    ```bash
-    ./client/tetris_battle_client
-    ```
-    _For Emscripten, you'll get `tetris_battle_client.html`, `tetris_battle_client.js`, `tetris_battle_client.wasm` in the `client` directory. You can serve them with a simple web server (e.g., `python3 -m http.server`)._
-
----
+원작 공개 자료를 참고한 개인용 재구현입니다. 공식 Facebook/Tetris 서비스가 아니며, 속도전·수집형 아이템 등은 확장 규칙입니다. CPU는 로컬 휴리스틱으로 동작합니다. 프로젝트 라이선스는 [MIT](LICENSE)입니다.

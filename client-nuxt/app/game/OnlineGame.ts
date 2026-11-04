@@ -476,13 +476,13 @@ export class OnlineGame extends Game {
 
         for (let y = 0; y < height - 1; y++) {
             for (let x = 0; x < width; x++) {
-                this.board.grid[y][x] = this.board.grid[y + 1][x]
+                this.board.grid[y]![x] = this.board.grid[y + 1]![x]!
             }
         }
 
         const hole = Math.floor(Math.random() * width)
         for (let x = 0; x < width; x++) {
-            this.board.grid[height - 1][x] = (x === hole) ? 0 : 8
+            this.board.grid[height - 1]![x] = (x === hole) ? 0 : 8
         }
     }
 

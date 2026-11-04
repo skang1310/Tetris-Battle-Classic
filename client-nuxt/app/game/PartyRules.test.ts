@@ -1,0 +1,12 @@
+import {describe,it,expect} from 'vitest'
+import {ModeSession} from './GameModes'
+import {normalizeMatchRules,matchRulesLabel} from './MatchRules'
+import {Tetromino} from './Tetromino'
+describe('handicap and cooperative rules',()=>{
+ it('normalizes limits and co-op single challenge rules',()=>{const r=normalizeMatchRules({handicap:[-4,99],cooperative:true,bestOf:5,goalLines:99});expect(r.handicap).toEqual([0,6]);expect(r.bestOf).toBe(1);expect(r.goalLines).toBe(40);expect(matchRulesLabel(r)).toContain('협동')})
+ it('applies per-seat garbage with a shared hole and no counted clears',()=>{const s=new ModeSession('battle2p',false,0,{handicap:[2,6]});expect(s.players.map(g=>g.board.grid.flat().filter(c=>c===8).length)).toEqual([18,54]);expect(s.players.every(g=>!g.isGameOver&&g.linesCleared===0&&g.pending===0)).toBe(true);expect(s.players[0]!.board.grid[19]).toEqual(s.players[1]!.board.grid[19])})
+ it('keeps high maps playable with handicap and does not reapply after a reset',()=>{for(let map=0;map<9;map++){const s=new ModeSession('battle2p',false,map,{handicap:[6,0]});expect(s.players[0]!.isGameOver).toBe(false)}const s=new ModeSession('battle2p',false,0,{handicap:[6,0]});s.players[0]!.isGameOver=true;s.update(1);expect(s.players[0]!.board.grid.flat().some(Boolean)).toBe(false)})
+ it('combines both players real clears and completes at the shared goal',()=>{const s=new ModeSession('battle2p',false,0,{cooperative:true,goalLines:40});s.players[0]!.linesCleared=21;s.players[1]!.linesCleared=18;s.checkGoals();expect(s.finished).toBe(false);s.players[1]!.linesCleared=19;s.checkGoals();expect(s.finished).toBe(true);expect(s.winner).toBe(0);expect(s.outcome).toContain('협동 성공');expect(s.leader).toBe(null)})
+ it('never attacks a teammate or credits fake sent lines',()=>{const s=new ModeSession('battle2p',false,0,{cooperative:true}),g=s.players[0]!;for(let y=16;y<20;y++)g.board.grid[y]=Array.from({length:10},(_,x)=>x===4?0:1);g.currentPiece=new Tetromino('I',2,0);g.currentPiece.rotationIndex=1;g.hardDrop();expect(g.linesCleared).toBe(4);expect(s.players[1]!.pending).toBe(0);expect(g.sent).toBe(0)})
+ it('retains progress after top-out and fails only at the time limit',()=>{const s=new ModeSession('battle2p',false,0,{cooperative:true,durationMs:60000});s.players[0]!.linesCleared=12;s.players[0]!.isGameOver=true;s.update(1);expect(s.players[0]!.linesCleared).toBe(12);expect(s.kos).toEqual([0,0]);expect(s.finished).toBe(false);s.update(59999);expect(s.winner).toBe(-1);expect(s.outcome).toContain('12/40')})
+})

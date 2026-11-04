@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { reactive } from 'vue'
+import { shallowReactive } from 'vue'
 import { mount } from '@vue/test-utils'
 import SinglePlayerGame from './SinglePlayerGame.vue'
 import { Game } from '~/game/Game'
@@ -9,7 +9,7 @@ const Leaderboard = { template: '<div></div>' }
 
 describe('SinglePlayerGame Score Formatting', () => {
     it('formats score with commas', async () => {
-        const game = reactive(new Game())
+        const game = shallowReactive(new Game())
         game.score = 12345
 
         const wrapper = mount(SinglePlayerGame, {

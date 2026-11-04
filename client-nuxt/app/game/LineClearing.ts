@@ -40,6 +40,7 @@ export function checkAndClearLines(board: Board): number {
  * Check if a line is complete (all cells filled)
  */
 function isLineComplete(board: Board, y: number): boolean {
+    if(board.grid[y]!.some(cell=>cell===9||cell===10))return false // Bomb and concrete rows require their own rules.
     for (let x = 0; x < board.width; x++) {
         if (board.isCellEmpty(x, y)) {
             return false

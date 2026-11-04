@@ -1,0 +1,13 @@
+import {finishPreflight} from './ready-fixture.mjs'
+import {chromium} from '/Users/davidkang/.codex/skills/develop-web-game/node_modules/playwright/index.mjs'
+import assert from 'node:assert/strict'
+const browser=await chromium.launch({headless:true}),ctx=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true}),p=await ctx.newPage(),errors=[]
+await p.addInitScript(()=>{window.hapticCalls=[];Object.defineProperty(navigator,'vibrate',{value:pattern=>{window.hapticCalls.push(pattern);return true},configurable:true})});p.on('pageerror',e=>errors.push(e.message))
+const state=()=>p.evaluate(()=>JSON.parse(window.render_game_to_text()))
+try{
+ await p.goto('http://127.0.0.1:8080/?mode=battle2p');await p.waitForFunction(()=>window.render_game_to_text);await finishPreflight(p);assert.equal(await p.getByRole('button',{name:'회전',exact:true}).count(),1);assert.equal(await p.getByRole('button',{name:'반시계 회전',exact:true}).count(),0)
+ await p.getByRole('button',{name:'회전',exact:true}).tap();assert.ok((await p.evaluate(()=>window.hapticCalls)).includes(8));await p.getByRole('button',{name:'빠른 낙하',exact:true}).tap();assert.ok((await p.evaluate(()=>window.hapticCalls)).includes(22));await p.getByRole('button',{name:'홀드',exact:true}).tap();assert.ok((await p.evaluate(()=>window.hapticCalls)).includes(12))
+ for(let i=0;i<80&&(await state()).kos.every(k=>k===0);i++){await p.getByRole('button',{name:'빠른 낙하',exact:true}).tap();await p.evaluate(()=>window.advanceTime(17))};assert.ok((await p.evaluate(()=>window.hapticCalls)).some(v=>JSON.stringify(v)==='[45,40,60]'))
+ await p.getByRole('button',{name:'조작 설정',exact:true}).click();await p.getByRole('tab',{name:'피드백',exact:true}).click();await p.getByRole('checkbox',{name:'햅틱과 시각 피드백 켜기'}).uncheck();const count=await p.evaluate(()=>window.hapticCalls.length);await p.getByRole('button',{name:'완료',exact:true}).click();await p.getByRole('button',{name:'RESUME',exact:true}).click();await p.getByRole('button',{name:'회전',exact:true}).tap();assert.equal(await p.evaluate(()=>window.hapticCalls.length),count)
+ await p.screenshot({path:'output/simple-glass/single-rotate.png'});await p.reload();await p.waitForFunction(()=>window.render_game_to_text);await finishPreflight(p);await p.getByRole('button',{name:'조작 설정',exact:true}).click();await p.getByRole('tab',{name:'피드백',exact:true}).click();assert.equal(await p.getByRole('checkbox',{name:'햅틱과 시각 피드백 켜기'}).isChecked(),false);assert.deepEqual(errors,[]);console.log('PASS: single rotate button; rotation/drop/hold/KO events sent to vibration API; disabled feedback and persisted setting; no browser errors. Hardware vibration is not verified.')
+}finally{await browser.close()}

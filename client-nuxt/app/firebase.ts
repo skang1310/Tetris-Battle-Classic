@@ -29,5 +29,7 @@ const firebaseConfig = {
     appId: config.public.firebaseAppId as string
 }
 
-const app = initializeApp(firebaseConfig)
-export const db = getFirestore(app)
+// Local installations work without the upstream owner's Firebase credentials.
+export const db = firebaseConfig.apiKey && firebaseConfig.projectId && firebaseConfig.appId
+    ? getFirestore(initializeApp(firebaseConfig))
+    : null

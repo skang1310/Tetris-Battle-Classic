@@ -10,15 +10,18 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "nuxt prepare && vue-tsc --noEmit -p .nuxt/tsconfig.app.json"
   },
   "dependencies": {
     "firebase": "^12.7.0",
     "nuxt": "^4.2.2",
+    "qrcode": "^1.5.4",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"
   },
   "devDependencies": {
+    "@types/qrcode": "^1.5.6",
     "@vite-pwa/nuxt": "^1.1.0",
     "@vitejs/plugin-vue": "^6.0.3",
     "@vue/test-utils": "^2.4.6",

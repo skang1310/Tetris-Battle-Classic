@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Tetris Battle',
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
         { name: 'theme-color', content: '#0f0c29' }
@@ -44,6 +44,7 @@ export default defineNuxtConfig({
   modules: ['@vite-pwa/nuxt'],
 
   pwa: {
+    disable: process.env.TETRIS_DESKTOP === '1',
     registerType: 'autoUpdate',
     manifest: {
       name: 'Tetris Battle',

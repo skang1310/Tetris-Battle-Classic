@@ -71,8 +71,8 @@ describe('EffectSystem', () => {
             ) as LineClearEffect[]
 
             expect(lineClearEffects).toHaveLength(1)
-            expect(lineClearEffects[0].y).toBe(19)
-            expect(lineClearEffects[0].timeLeft).toBeGreaterThan(0)
+            expect(lineClearEffects[0]!.y).toBe(19)
+            expect(lineClearEffects[0]!.timeLeft).toBeGreaterThan(0)
         })
 
         it('should create explosion particles with positive gravity', () => {
@@ -106,8 +106,8 @@ describe('EffectSystem', () => {
             ) as WaveEffect[]
 
             expect(waveEffects).toHaveLength(1)
-            expect(waveEffects[0].radius).toBe(0)
-            expect(waveEffects[0].life).toBe(1.0)
+            expect(waveEffects[0]!.radius).toBe(0)
+            expect(waveEffects[0]!.life).toBe(1.0)
         })
 
         it('should create shatter particles with rotation', () => {
@@ -151,7 +151,7 @@ describe('EffectSystem', () => {
 
             effectSystem.update(16) // ~1 frame at 60fps
 
-            expect(effectSystem.particles[0].x).toBeGreaterThan(100)
+            expect(effectSystem.particles[0]!.x).toBeGreaterThan(100)
         })
 
         it('should apply gravity to particles', () => {
@@ -161,7 +161,7 @@ describe('EffectSystem', () => {
 
             effectSystem.update(16)
 
-            expect(effectSystem.particles[0].vy).toBeGreaterThan(0)
+            expect(effectSystem.particles[0]!.vy).toBeGreaterThan(0)
         })
 
         it('should decrease particle life over time', () => {
@@ -171,7 +171,7 @@ describe('EffectSystem', () => {
 
             effectSystem.update(100)
 
-            expect(effectSystem.particles[0].life).toBeLessThan(1.0)
+            expect(effectSystem.particles[0]!.life).toBeLessThan(1.0)
         })
 
         it('should remove dead particles (life <= 0)', () => {
@@ -191,7 +191,7 @@ describe('EffectSystem', () => {
 
             effectSystem.update(100)
 
-            expect((effectSystem.effects[0] as LineClearEffect).timeLeft).toBe(200)
+            expect((effectSystem.effects[0]! as LineClearEffect).timeLeft).toBe(200)
         })
 
         it('should expand wave radius over time', () => {
@@ -201,7 +201,7 @@ describe('EffectSystem', () => {
 
             effectSystem.update(100)
 
-            expect((effectSystem.effects[0] as WaveEffect).radius).toBeGreaterThan(0)
+            expect((effectSystem.effects[0]! as WaveEffect).radius).toBeGreaterThan(0)
         })
 
         it('should update shatter particle rotation', () => {
@@ -211,7 +211,7 @@ describe('EffectSystem', () => {
 
             effectSystem.update(16)
 
-            expect(effectSystem.particles[0].rotation).toBeGreaterThan(0)
+            expect(effectSystem.particles[0]!.rotation).toBeGreaterThan(0)
         })
     })
 })

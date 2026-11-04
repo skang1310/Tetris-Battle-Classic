@@ -1,0 +1,6 @@
+Visual assets and map layouts from:
+https://github.com/HCN1222/Tetris-battle-with-Q-learning
+Based on https://github.com/ylsung/TetrisBattle
+The repository's MIT LICENSE is included as REFERENCE-LICENSE.txt.
+Original assets may depict Tetris marks. This is a local personal build, not an official Tetris product.
+CPU gameplay in this adaptation uses a placement heuristic, not the upstream trained Q-learning model.

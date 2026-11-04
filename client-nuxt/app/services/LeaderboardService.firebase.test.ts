@@ -52,7 +52,7 @@ describe('LeaderboardService Firestore Integration', () => {
         // but we can check if addDoc was called.
 
         expect(mockAddDoc).toHaveBeenCalledTimes(1)
-        const addDocArgs = mockAddDoc.mock.calls[0]
+        const addDocArgs = mockAddDoc.mock.calls[0]!
         // addDoc(collectionRef, data)
         expect(addDocArgs[1]).toMatchObject({
             playerName: 'TestPlayer',

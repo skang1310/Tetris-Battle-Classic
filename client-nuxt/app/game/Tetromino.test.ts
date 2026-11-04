@@ -3,7 +3,7 @@
  * Failing tests for Tetromino class - represents a Tetris piece
  */
 import { describe, it, expect } from 'vitest'
-import { Tetromino, TetrominoType } from './Tetromino'
+import { Tetromino, type TetrominoType } from './Tetromino'
 
 describe('Tetromino', () => {
     describe('constructor', () => {
