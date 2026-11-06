@@ -47,6 +47,10 @@ xcodebuild -project apple/TetrisBattle.xcodeproj -scheme TetrisBattle-tvOS -sdk 
 - iOS / tvOS 서명 빌드, 연결된 iPhone 및 Apple TV 4K 설치·프로세스 실행.
 - JavaScriptCore에서 세 모드, 독립 2인 입력, 동일 블록, 이동·회전·홀드·낙하·아이템 공격, 일시정지, 시간 종료/승자, CPU 검증.
 - 기존 프런트엔드 419개 테스트 통과.
-- 실제 DualSense + Xbox 동시 입력과 무선 연결 지연은 사용자 기기에서 추가 확인이 필요합니다.
+- 실제 Apple TV + Xbox에서 좌우·회전·하드 드롭·홀드 입력 로그와 쌓인 블록/홀드/공격 화면 확인. DualSense + Xbox 동시 2P와 무선 연결 지연은 추가 확인이 필요합니다.
 
 Apple TV 시뮬레이터 설치로 공간이 부족해져, 화면 검증 후 이번 작업에서 추가한 tvOS 런타임과 테스트 기기만 제거했습니다. tvOS SDK 및 앱 프로젝트는 유지됩니다.
+
+### tvOS 입력 경로
+
+`ControllerRoot`가 `GCEventViewController` 안에 SwiftUI 게임을 호스팅합니다. 메뉴·일시정지·결과에서는 `controllerUserInteractionEnabled=true`로 포커스 탐색을 사용하고, 카운트다운·플레이 중에는 false로 게임패드 프로필에 입력을 전달합니다. [Apple의 tvOS 입력 설명](https://developer.apple.com/documentation/gamecontroller/gceventviewcontroller)을 따릅니다. 진단 메시지는 `[BattleInput]` 접두사로 출력하며, 최근 입력 상태는 앱의 `Library/Caches/input-diagnostics.json`에 저장합니다.

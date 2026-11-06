@@ -87,6 +87,8 @@ struct BattleState: Decodable {
         for (i,pad) in pads.enumerated() {
             pad?.playerIndex = i == 0 ? .index1 : .index2
         }
+        print("[BattleInput] connected: \(controllers.joined(separator: "; "))")
+        saveInputDiagnostics("controllers refreshed")
         pressed = [[], []]; held.removeAll()
         if removed && playing { setPaused(true) }
     }
@@ -116,6 +118,8 @@ struct BattleState: Decodable {
         if down {
             pressed[seat].insert(action)
             if !was {
+                print("[BattleInput] seat=\(seat+1) action=\(action) playing=\(playing) countdown=\(countdown) paused=\(state?.paused ?? false)")
+                saveInputDiagnostics("\(seat+1)P \(action)")
                 if action == "menu" {
                     if !playing { start() }
                     else if state?.finished == true { start() }
@@ -131,6 +135,14 @@ struct BattleState: Decodable {
                 held[key] = now
             }
         } else { pressed[seat].remove(action); held.removeValue(forKey: key) }
+    }
+    private func saveInputDiagnostics(_ input: String) {
+        let folder=FileManager.default.urls(for:.cachesDirectory,in:.userDomainMask)[0]
+        try? FileManager.default.createDirectory(at:folder,withIntermediateDirectories:true)
+        let value:[String:Any] = ["time":ISO8601DateFormatter().string(from:Date()),"controllers":controllers,"lastInput":input,"playing":playing,"countdown":countdown,"paused":state?.paused ?? false]
+        if let data=try? JSONSerialization.data(withJSONObject:value,options:.prettyPrinted) {
+            try? data.write(to:folder.appendingPathComponent("input-diagnostics.json"),options:.atomic)
+        }
     }
     private func frame() {
         let now = CACurrentMediaTime(); let dt = min(0.05, max(0,now-last)); last = now

@@ -43,6 +43,7 @@
 		837E6164204A1EAD677C40EC /* n9.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A4FC09C8AD794076EA81D6 /* n9.png */; };
 		853A0C0CDFE2A87FAF4B8FF2 /* n9.png in Resources */ = {isa = PBXBuildFile; fileRef = 45A4FC09C8AD794076EA81D6 /* n9.png */; };
 		8B2D27A00495918AF0EFB466 /* battle.png in Resources */ = {isa = PBXBuildFile; fileRef = E3AB2361BEF36DF001F1731F /* battle.png */; };
+		8E98FF6E176BB1F6CAE30C67 /* ControllerRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE39D11369BFF9B1DAAD47 /* ControllerRoot.swift */; };
 		95382A145D98B584746467C8 /* lose.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A8D38D655BD72F25D47AC52 /* lose.png */; };
 		9DC06B3A46CDC380A1210F4D /* win.png in Resources */ = {isa = PBXBuildFile; fileRef = AA99440354C2E130D3057C39 /* win.png */; };
 		A42D1AB4B73F750CF38A12E0 /* I.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F166EB5AA83A6A21975AF0A /* I.png */; };
@@ -59,6 +60,7 @@
 		D1874738C9E960CD7C106A5F /* BattleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1DF5E38C8A15396771DB346 /* BattleModel.swift */; };
 		D777EB4211C9AE3571868B37 /* BattleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC17BDAF8E28DA57A7FCB8CA /* BattleApp.swift */; };
 		DB9CEE4A9778634B32ADA185 /* O.png in Resources */ = {isa = PBXBuildFile; fileRef = 03D4CFCF44BDF22036AEF4A0 /* O.png */; };
+		DD70D6871A437A80BC204B79 /* ControllerRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDFE39D11369BFF9B1DAAD47 /* ControllerRoot.swift */; };
 		E5B72668F5C92DEFA71BE943 /* n5.png in Resources */ = {isa = PBXBuildFile; fileRef = BE88E4C94D801EC6673F55C2 /* n5.png */; };
 		EA3A6D2AB5A7903B77FA7DC8 /* n8.png in Resources */ = {isa = PBXBuildFile; fileRef = D2816600F7347D6E84CB99E0 /* n8.png */; };
 		EBEFC2F1DAB2740365387D0D /* G.png in Resources */ = {isa = PBXBuildFile; fileRef = 234775AB1B8DCEDF797D8F8B /* G.png */; };
@@ -92,6 +94,7 @@
 		AC17BDAF8E28DA57A7FCB8CA /* BattleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleApp.swift; sourceTree = "<group>"; };
 		B151BF25BC0AF901D7B3A188 /* TetrisBattle-iOS.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = "TetrisBattle-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE88E4C94D801EC6673F55C2 /* n5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n5.png; sourceTree = "<group>"; };
+		CDFE39D11369BFF9B1DAAD47 /* ControllerRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerRoot.swift; sourceTree = "<group>"; };
 		D2816600F7347D6E84CB99E0 /* n8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n8.png; sourceTree = "<group>"; };
 		D9634D6FDCC9E8D1C19140C3 /* ghost.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ghost.png; sourceTree = "<group>"; };
 		E1DF5E38C8A15396771DB346 /* BattleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BattleModel.swift; sourceTree = "<group>"; };
@@ -137,6 +140,7 @@
 				AC17BDAF8E28DA57A7FCB8CA /* BattleApp.swift */,
 				E1DF5E38C8A15396771DB346 /* BattleModel.swift */,
 				5A1E0876BC26F5FAB06FD57D /* ClassicCanvas.swift */,
+				CDFE39D11369BFF9B1DAAD47 /* ControllerRoot.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -326,6 +330,7 @@
 				5E946E08D1B8EF7CEDF0CFD8 /* BattleApp.swift in Sources */,
 				D1874738C9E960CD7C106A5F /* BattleModel.swift in Sources */,
 				789359870726D9BC8A9E2C55 /* ClassicCanvas.swift in Sources */,
+				8E98FF6E176BB1F6CAE30C67 /* ControllerRoot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +341,7 @@
 				D777EB4211C9AE3571868B37 /* BattleApp.swift in Sources */,
 				73256AEAED8882FE2772B9BB /* BattleModel.swift in Sources */,
 				CD307EEFE85DFB9534F26C29 /* ClassicCanvas.swift in Sources */,
+				DD70D6871A437A80BC204B79 /* ControllerRoot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,7 +400,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = AXCMBMA992;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -458,7 +464,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = AXCMBMA992;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

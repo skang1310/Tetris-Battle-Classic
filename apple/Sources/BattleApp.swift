@@ -5,7 +5,7 @@ import SwiftUI
     @Environment(\.scenePhase) private var phase
     var body: some Scene {
         WindowGroup {
-            BattleRoot().environmentObject(model)
+            ControllerRoot(model:model)
                 .onChange(of: phase) { _, phase in if phase != .active { model.setPaused(true) } }
         }
     }
