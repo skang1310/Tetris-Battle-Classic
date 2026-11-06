@@ -401,7 +401,7 @@ onMounted(() => {
     // Auto scroll on mobile
     if (isMobileDevice() && gameContainer.value) {
       setTimeout(() => {
-        gameContainer.value?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+        gameContainer.value?.scrollIntoView?.({ behavior: 'smooth', block: 'end' })
       }, 300)
     }
 })

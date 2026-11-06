@@ -72,3 +72,7 @@ Go의 정적 파일 포함을 위해 먼저 위의 정적 파일 생성·복사 
 기존 [oatrice/Tetris-Battle](https://github.com/oatrice/Tetris-Battle)의 코드와 히스토리를 바탕으로 확장했습니다. 원본 프로젝트 안내는 [UPSTREAM-README](docs/UPSTREAM-README.md)에 보존했습니다. 원작 스타일 화면·스프라이트·음악과 맵 참고 자료는 [HCN1222/Tetris-battle-with-Q-learning](https://github.com/HCN1222/Tetris-battle-with-Q-learning)이며, 해당 MIT 고지를 [REFERENCE-LICENSE](macos/REFERENCE-LICENSE)에 보존했습니다.
 
 원작 공개 자료를 참고한 개인용 재구현입니다. 공식 Facebook/Tetris 서비스가 아니며, 속도전·수집형 아이템 등은 확장 규칙입니다. CPU는 로컬 휴리스틱으로 동작합니다. 프로젝트 라이선스는 [MIT](LICENSE)입니다.
+
+## iPhone · iPad · Apple TV
+
+같은 게임 엔진과 맥의 원본 게임 이미지를 사용하는 네이티브 앱을 `apple/`에 추가했습니다. DualSense / Xbox, CPU 및 같은 기기 컨트롤러 2P를 지원합니다. [빌드와 조작 안내](apple/README.md)를 참고하세요.

@@ -75,3 +75,8 @@ macos/internet/
 *.pfx
 *.pem
 *.key
+
+# Apple native build products and per-user signing state
+/apple/build*/
+/apple/TetrisBattle.xcodeproj/xcuserdata/
+/apple/TetrisBattle.xcodeproj/project.xcworkspace/xcuserdata/
