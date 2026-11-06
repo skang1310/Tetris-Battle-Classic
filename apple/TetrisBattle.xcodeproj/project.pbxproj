@@ -47,8 +47,10 @@
 		95382A145D98B584746467C8 /* lose.png in Resources */ = {isa = PBXBuildFile; fileRef = 5A8D38D655BD72F25D47AC52 /* lose.png */; };
 		9DC06B3A46CDC380A1210F4D /* win.png in Resources */ = {isa = PBXBuildFile; fileRef = AA99440354C2E130D3057C39 /* win.png */; };
 		A42D1AB4B73F750CF38A12E0 /* I.png in Resources */ = {isa = PBXBuildFile; fileRef = 4F166EB5AA83A6A21975AF0A /* I.png */; };
+		AC5D53B6B1B263558A83BAE3 /* TVMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153FA3C3C96781ED72863CA1 /* TVMenu.swift */; };
 		AE2A4E893A8E9DF392F5A851 /* battle-music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 025C3B7EE5EB6D886639A35E /* battle-music.mp3 */; };
 		B2509EF22B269231CDE1661A /* S.png in Resources */ = {isa = PBXBuildFile; fileRef = A725FD50E660DD183D1E60C6 /* S.png */; };
+		B7DB07A625833A7A7DD85F8A /* TVMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153FA3C3C96781ED72863CA1 /* TVMenu.swift */; };
 		BA45EA15E03D7D1093E887E8 /* G.png in Resources */ = {isa = PBXBuildFile; fileRef = 234775AB1B8DCEDF797D8F8B /* G.png */; };
 		BACB70EB407F4908A3AB5EA4 /* n6.png in Resources */ = {isa = PBXBuildFile; fileRef = 11F243C465AEC4ADDCB065D3 /* n6.png */; };
 		BD3ED4FD4680AECC9EB9E828 /* n4.png in Resources */ = {isa = PBXBuildFile; fileRef = 7D49C0269A25AE4FF323D564 /* n4.png */; };
@@ -74,6 +76,7 @@
 		03D4CFCF44BDF22036AEF4A0 /* O.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = O.png; sourceTree = "<group>"; };
 		0461488B8E2F55CDE3E5BCD4 /* T.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = T.png; sourceTree = "<group>"; };
 		11F243C465AEC4ADDCB065D3 /* n6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n6.png; sourceTree = "<group>"; };
+		153FA3C3C96781ED72863CA1 /* TVMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMenu.swift; sourceTree = "<group>"; };
 		1BF3A114578D3333C1CF0279 /* n7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n7.png; sourceTree = "<group>"; };
 		234775AB1B8DCEDF797D8F8B /* G.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = G.png; sourceTree = "<group>"; };
 		3F4094883F77D0381EA4AD75 /* n0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = n0.png; sourceTree = "<group>"; };
@@ -141,6 +144,7 @@
 				E1DF5E38C8A15396771DB346 /* BattleModel.swift */,
 				5A1E0876BC26F5FAB06FD57D /* ClassicCanvas.swift */,
 				CDFE39D11369BFF9B1DAAD47 /* ControllerRoot.swift */,
+				153FA3C3C96781ED72863CA1 /* TVMenu.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -331,6 +335,7 @@
 				D1874738C9E960CD7C106A5F /* BattleModel.swift in Sources */,
 				789359870726D9BC8A9E2C55 /* ClassicCanvas.swift in Sources */,
 				8E98FF6E176BB1F6CAE30C67 /* ControllerRoot.swift in Sources */,
+				AC5D53B6B1B263558A83BAE3 /* TVMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +347,7 @@
 				73256AEAED8882FE2772B9BB /* BattleModel.swift in Sources */,
 				CD307EEFE85DFB9534F26C29 /* ClassicCanvas.swift in Sources */,
 				DD70D6871A437A80BC204B79 /* ControllerRoot.swift in Sources */,
+				B7DB07A625833A7A7DD85F8A /* TVMenu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,7 +406,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = AXCMBMA992;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -464,7 +470,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = AXCMBMA992;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -520,7 +526,7 @@
 		F47A3E4539E6CBF62245B39A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = TVBrand;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -535,7 +541,7 @@
 		FCF829E8F49F08C11EEA3439 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = TVBrand;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -54,3 +54,18 @@ Apple TV 시뮬레이터 설치로 공간이 부족해져, 화면 검증 후 이
 ### tvOS 입력 경로
 
 `ControllerRoot`가 `GCEventViewController` 안에 SwiftUI 게임을 호스팅합니다. 메뉴·일시정지·결과에서는 `controllerUserInteractionEnabled=true`로 포커스 탐색을 사용하고, 카운트다운·플레이 중에는 false로 게임패드 프로필에 입력을 전달합니다. [Apple의 tvOS 입력 설명](https://developer.apple.com/documentation/gamecontroller/gceventviewcontroller)을 따릅니다. 진단 메시지는 `[BattleInput]` 접두사로 출력하며, 최근 입력 상태는 앱의 `Library/Caches/input-diagnostics.json`에 저장합니다.
+
+## TV UI 업데이트 — 빌드 4
+
+- TV 전용 한 화면 메뉴: 모드 3개, CPU/2P, 맵, 조작·사운드, 연결 상태.
+- 게임패드/리모컨 포커스 확대와 테두리, A/✕ 선택. 상세 설정은 시트로 분리.
+- TV의 바깥 컨테이너까지 전체 화면으로 확장. 원본 아트/정사각형 블록은 균일 배율을 유지하고 상하 장식만 덜어냅니다.
+- TV 아이템 슬롯은 보드 옆에 통합. 하단 컨트롤 안내는 일시정지 화면으로 이동.
+- 카운트다운 중 백그라운드 전환 시에도 일시정지를 먼저 표시해 재개 가능.
+- Imagegen으로 생성한 배경·전경 2레이어 Apple TV 아이콘과 Top Shelf 자산. [원본 및 프롬프트](Artwork/README.md).
+
+디자인 근거: [Apple Layout](https://developer.apple.com/design/human-interface-guidelines/layout), [Designing for games](https://developer.apple.com/design/human-interface-guidelines/designing-for-games), [App icons](https://developer.apple.com/design/human-interface-guidelines/app-icons).
+
+![TV 전용 메뉴](../docs/images/apple-tv-menu.png)
+
+실제 Apple TV 4K 3세대에서 빌드 4 설치·실행, 홈 화면 레이어 아이콘, 메뉴 방향키 3단계 이동과 시작, 원본 아트의 전체 화면 게임을 확인했습니다. Xbox의 물리 입력은 로그 및 화면으로 확인했고, DualSense+Xbox 동시 2P는 추가 확인 대상입니다.

@@ -9,7 +9,7 @@ settings:
     SWIFT_VERSION: '5.0'
     DEVELOPMENT_TEAM: AXCMBMA992
     MARKETING_VERSION: '1.0.0'
-    CURRENT_PROJECT_VERSION: 2
+    CURRENT_PROJECT_VERSION: 4
     GENERATE_INFOPLIST_FILE: YES
     INFOPLIST_KEY_CFBundleDisplayName: Tetris Battle
     INFOPLIST_KEY_GCSupportsControllerUserInteraction: YES
@@ -33,5 +33,6 @@ targets:
     sources: [Sources, Resources]
     settings:
       base:
+        ASSETCATALOG_COMPILER_APPICON_NAME: TVBrand
         PRODUCT_BUNDLE_IDENTIFIER: com.skang1310.tetrisbattle.tv
         TARGETED_DEVICE_FAMILY: '3'

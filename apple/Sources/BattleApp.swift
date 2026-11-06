@@ -6,6 +6,9 @@ import SwiftUI
     var body: some Scene {
         WindowGroup {
             ControllerRoot(model:model)
+                #if os(tvOS)
+                .ignoresSafeArea()
+                #endif
                 .onChange(of: phase) { _, phase in if phase != .active { model.setPaused(true) } }
         }
     }
@@ -16,7 +19,13 @@ struct BattleRoot: View {
     var body: some View {
         ZStack {
             LinearGradient(colors: [Color(hex:"edffd5"),Color(hex:"b5ed56")],startPoint:.topLeading,endPoint:.bottomTrailing).ignoresSafeArea()
-            if model.playing { arena } else { menu }
+            if model.playing { arena } else {
+                #if os(tvOS)
+                TVMenu()
+                #else
+                menu
+                #endif
+            }
         }
         .preferredColorScheme(.light)
         #if os(tvOS)
@@ -54,6 +63,33 @@ struct BattleRoot: View {
         }.buttonStyle(.borderedProminent)
     }
     var arena: some View {
+        #if os(tvOS)
+        ZStack {
+            if let state=model.state { ClassicCanvas(state:state,mode:model.mode,cpu:!model.twoPlayer,widescreen:true) }
+            matchOverlay
+        }.ignoresSafeArea()
+        #else
+        phoneArena
+        #endif
+    }
+    var winnerTitle: String {
+        guard let winner=model.state?.winner else { return "BATTLE OVER" }
+        if winner == -1 { return "DRAW" }
+        return winner==1 && !model.twoPlayer ? "CPU WIN!" : "\(winner+1)P WIN!"
+    }
+    @ViewBuilder var matchOverlay: some View {
+        if model.state?.paused == true {
+            overlay(title:"일시정지",subtitle:"✕ / A 회전 · ○ / B 낙하 · L1 / LB 홀드\n□ / X · △ / Y · R1 / RB 아이템 1 · 2 · 3") {
+                Button("계속 플레이") { model.setPaused(false) }.disabled(model.twoPlayer && model.controllers.count<2)
+                Button("메인 메뉴") { model.leave() }
+            }
+        } else if model.state?.finished == true {
+            overlay(title:winnerTitle,subtitle:model.state?.outcome ?? "") {
+                Button("다시 플레이") { model.start() }; Button("메인 메뉴") { model.leave() }
+            }
+        } else if model.countdown>0 { overlay(title:"\(model.countdown)",subtitle:"READY TO BATTLE") }
+    }
+    var phoneArena: some View {
         GeometryReader { geo in
             VStack(spacing:8) {
                 if let state = model.state {
@@ -85,16 +121,7 @@ struct BattleRoot: View {
                     #endif
                 }
             }.padding(geo.size.width<650 ? 8:24)
-            if model.countdown>0 { overlay(title:"\(model.countdown)",subtitle:"READY TO BATTLE") }
-            else if model.state?.finished == true {
-                overlay(title:model.state?.winner == -1 ? "DRAW" : "\((model.state?.winner ?? 0)+1)P WIN!",subtitle:model.state?.outcome ?? "") {
-                    Button("다시 플레이") { model.start() }; Button("메인 메뉴") { model.leave() }
-                }
-            } else if model.state?.paused == true {
-                overlay(title:"일시정지",subtitle:"컨트롤러가 끊겼다면 다시 연결한 뒤 계속하세요.") {
-                    Button("계속 플레이") { model.setPaused(false) }.disabled(model.twoPlayer && model.controllers.count<2); Button("메인 메뉴") { model.leave() }
-                }
-            }
+            matchOverlay
         }
     }
     var time: String { let s=Int(ceil((model.state?.remaining ?? 120000)/1000)); return String(format:"%02d:%02d",s/60,s%60) }
